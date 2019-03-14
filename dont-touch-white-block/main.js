@@ -51,7 +51,7 @@ window.onload = function() {
       if (obj.children.length === 6) {
         for (var i = 0; i < 4; i++) {
           if (obj.children[obj.children.length - 1].children[i].className === 'i') {
-            // 游戏结束
+            // 未点击，游戏结束
             obj.style.top = '-150px';
             count.innerHTML = '游戏结束，最高得分：' + num;
             // 关闭定时器
@@ -79,7 +79,7 @@ window.onload = function() {
           // 显示得分
           count.innerHTML = '当前得分：' + num;
         } else {
-          // 游戏结束
+          // 点击白块，游戏结束
           obj.style.top = 0;
           count.innerHTML = '游戏结束，最高得分：' + num;
           // 关闭定时器
