@@ -46,7 +46,7 @@ var map = document.getElementsByClassName('map')[0];
     div.style.position = 'absolute';
 
     this.x = new Random().getRandom(0, map.offsetWidth / this.width) * this.width;
-    this.x = new Random().getRandom(0, map.offsetHeight / this.height) * this.height;
+    this.y = new Random().getRandom(0, map.offsetHeight / this.height) * this.height;
     div.style.left = this.x + 'px';
     div.style.top = this.y + 'px';
 
@@ -60,7 +60,7 @@ var map = document.getElementsByClassName('map')[0];
       elements.splice(i, 1);
     }
   }
-}());
+})();
 
 // 产生小蛇对象
 (function() {
@@ -167,7 +167,7 @@ var map = document.getElementsByClassName('map')[0];
       elements.splice(i, 1);
     }
   }
-}());
+})();
 
 // 产生游戏对象
 (function() {
@@ -240,7 +240,7 @@ var map = document.getElementsByClassName('map')[0];
   };
 
   window.Game = Game;
-}());
+})();
 
 var game = new Game(map);
 game.init();
