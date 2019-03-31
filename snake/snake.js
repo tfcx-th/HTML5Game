@@ -13,7 +13,7 @@ var map = document.getElementsByClassName('map')[0];
   Random.prototype.getRandom = function(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
   };
-}());
+})();
 
 // 产生小方块对象
 (function() {
@@ -106,6 +106,7 @@ var map = document.getElementsByClassName('map')[0];
       div.style.width = this.width + 'px';
       div.style.height = this.height + "px";
       div.style.position = 'absolute';
+      div.style.border = '1px solid black';
 
       // 位置
       var tempObj = this.body[i];
@@ -190,7 +191,14 @@ var map = document.getElementsByClassName('map')[0];
   };
 
   Game.prototype.autoRun = function() {
-    var timeId = setInterval(function() {
+
+    var speed = 500; 
+    var timeId = setInterval(autoMove.bind(that), speed);
+
+    function autoMove() {
+
+      console.log(speed);
+
       this.snack.move(this.food);
       this.snack.init(this.map);
 
@@ -198,18 +206,36 @@ var map = document.getElementsByClassName('map')[0];
       var maxX = this.map.offsetWidth / this.snack.width;
       var maxY = this.map.offsetHeight / this.snack.height;
 
+      // 判断是否会吃到自己
+      for (var i = 1; i < this.snack.body.length; i++) {
+        if ((this.snack.body[0].x === this.snack.body[i].x) && (this.snack.body[0].y === this.snack.body[i].y)) {
+          clearInterval(timeId);
+          alert('Game Over!');
+          return;
+        }
+      }
+
       // x
       if ((this.snack.body[0].x < 0) || (this.snack.body[0].x >= maxX)) {
         clearInterval(timeId);
         alert('Game Over!');
+        return;
       }
 
       // y
       if ((this.snack.body[0].y < 0) || (this.snack.body[0].y >= maxY)) {
         clearInterval(timeId);
         alert('Game Over!');
+        return;
       }
-    }.bind(that), 150);
+
+      // 蛇的速度
+      if (Math.floor(this.snack.body.length) < 28) {
+        speed = 500 - 50 * Math.floor(this.snack.body.length / 3);
+      }
+      clearInterval(timeId);
+      timeId = setInterval(autoMove.bind(that), speed);
+    }
   };
 
   Game.prototype.changeDirection = function() {
@@ -242,8 +268,10 @@ var map = document.getElementsByClassName('map')[0];
   window.Game = Game;
 })();
 
-var game = new Game(map);
-game.init();
+function start() {
+  var game = new Game(map);
+  game.init();
+}
 
 // 为任意元素绑定任意事件
 function addAnyEventListener(element, type, func) {
