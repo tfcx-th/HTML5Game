@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>MineSweeper</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="main" id="ms-main">
+    <table id="landmine"></table>
+    <div id="operation">
+      <div class="tip">剩余雷数：<span class="light red" id="land-mine-count">0</span>个</div>
+      <div class="tip">持续时间：<span class="light f60" id="cost-time">0</span>秒</div>
+      <fieldset>
+        <legend>难度选择：</legend>
+        <input type="radio" name="level" id="low-level" checked="checked" value="10" />
+        <label for="low-level">初级（10*10）</label><br />
+        <input type="radio" name="level" id="medium-level" value="15" />
+        <label for="medium-level">中级（15*15）</label><br />
+        <input type="radio" name="level" id="high-level" value="20" />
+        <label for="high-level">高级（20*20）</label><br />
+      </fieldset>
+      <input type="button" id="begin" value="开始游戏" /><br />
+      <div class="tip txtleft">提示：
+        <ul>
+          <li>1 点击“开始游戏”游戏开始计时</li>
+          <li>2 游戏过程中点击“开始游戏”将重新开始游戏</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+  <script src="ms.js"></script>
+</body>
+</html>
