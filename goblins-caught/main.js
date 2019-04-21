@@ -77,6 +77,19 @@ var update = function (modifier) {
     monstersCaught++;
     reset();
   }
+
+  if (hero.x >= canvas.width  || 
+      hero.x <= 0 ||
+      hero.y >= canvas.height ||
+      hero.y <= 0) {
+    // 先将状态恢复成初始，否则会因为调用RequestAnimationFrame不断alert
+    hero.x = canvas.width / 2;
+    hero.y = canvas.height / 2;
+    modifier = 0;
+    keysDown = {};
+    monstersCaught = 0;
+    alert('GAME OVER!');
+  }
 };
 
 // 渲染物体
